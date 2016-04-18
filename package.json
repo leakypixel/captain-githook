@@ -1,0 +1,27 @@
+{
+  "name": "captain-githook",
+  "version": "0.0.1",
+  "description": "An NPM module to allow managing git hooks with source control.",
+  "main": "install.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node ./install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leakypixel/captain-githook"
+  },
+  "keywords": [
+    "git",
+    "hooks",
+    "git-hooks"
+  ],
+  "author": "Craig Fletcher (hi@leakypixel.net)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leakypixel/captain-githook/issues"
+  },
+  "dependencies": {
+    "fs-extra": "^0.28.0"
+  }
+}

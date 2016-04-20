@@ -14,7 +14,7 @@ var hooksDir = path.dirname(__filename);
 // change stuff *after* we've checked it.
 var localHook = path.join(hooksDir, "local", callingFile);
 fs.stat(localHook, function(err, stats) {
-  if (stats.isFile()) {
+  if (stats && stats.isFile()) {
     exec(localHook, function(error, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);
@@ -27,7 +27,7 @@ fs.stat(localHook, function(err, stats) {
 
 var sharedHook = path.join(hooksDir, "shared", callingFile);
 fs.stat(sharedHook, function(err, stats) {
-  if (stats.isFile()) {
+  if (stats && stats.isFile()) {
     exec(sharedHook, function(error, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);

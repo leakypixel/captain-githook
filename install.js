@@ -2,11 +2,12 @@
 
 var fs = require("fs-extra");
 var path = require("path");
-var appDir = path.dirname(require.main.filename);
-var gitHooksDir = path.join(appDir, ".git", "hooks");
-var gitHooksTempDir = path.join(appDir, ".git", "local");
+var moduleDir = path.dirname(require.main.filename);
+var appRoot = require('app-root-path');
+var gitHooksDir = path.join(appRoot, ".git", "hooks");
+var gitHooksTempDir = path.join(appRoot, ".git", "local");
 var localHooksDir = path.join(gitHooksDir, "local");
-var projectHooksDir = path.join(appDir, ".githooks");
+var projectHooksDir = path.join(appRoot, ".githooks");
 
 function setLinks() {
   fs.mkdirp(projectHooksDir, function(err) {
@@ -21,7 +22,7 @@ function setLinks() {
 }
 function linkHooks() {
   var hooks = ["applypatch-msg", "commit-msg", "post-commit", "post-receive", "post-update", "pre-applypatch", "pre-commit", "prepare-commit-msg", "pre-rebase", "update"];
-  var hookSplitter = path.join(path.dirname(__filename), "split-hook.js");
+  var hookSplitter = path.join(moduleDir, "split-hook.js");
   // Make the hooksplitter executable. I'd prefer this to be a "+x", but this
   // implementation doesn't seem to support it. I could be wrong.
   fs.chmodSync(hookSplitter, "755");

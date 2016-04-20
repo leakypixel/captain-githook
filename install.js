@@ -3,7 +3,7 @@
 var fs = require("fs-extra");
 var path = require("path");
 var moduleDir = path.dirname(require.main.filename);
-var appRoot = require('app-root-path');
+var appRoot = require('app-root-path').path;
 var gitHooksDir = path.join(appRoot, ".git", "hooks");
 var gitHooksTempDir = path.join(appRoot, ".git", "local");
 var localHooksDir = path.join(gitHooksDir, "local");

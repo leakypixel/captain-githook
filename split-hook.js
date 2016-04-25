@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var fs = require("fs");
 var path = require("path");
 var exec = require("child_process").exec;
@@ -15,25 +14,19 @@ var hooksDir = path.dirname(__filename);
 var localHook = path.join(hooksDir, "local", callingFile);
 fs.stat(localHook, function(err, stats) {
   if (stats && stats.isFile()) {
-    exec(localHook, function(error, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      if (error !== null) {
-        console.log(error.code);
-      }
-    });
+    var localHookProcess = exec(localHook);
+    process.stdin.pipe(localHookProcess.stdin);
+    localHookProcess.stdout.pipe(process.stdout);
+    localHookProcess.stderr.pipe(process.stderr);
   }
 });
 
 var sharedHook = path.join(hooksDir, "shared", callingFile);
 fs.stat(sharedHook, function(err, stats) {
   if (stats && stats.isFile()) {
-    exec(sharedHook, function(error, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      if (error !== null) {
-        console.log("Error:", error);
-      }
-    });
+    var sharedHookProcess = exec(sharedHook);
+    process.stdin.pipe(sharedHookProcess.stdin);
+    sharedHookProcess.stdout.pipe(process.stdout);
+    sharedHookProcess.stderr.pipe(process.stderr);
   }
 });

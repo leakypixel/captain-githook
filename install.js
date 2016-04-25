@@ -34,5 +34,9 @@ function linkHooks() {
     fs.chmodSync(hookPath, "755");
   });
 }
-
-setLinks();
+fs.stat(localHooksDir, function(err, stats) {
+  // Check if folder exists - if not, assume we're safe and run the install.
+  if (err && err.errno === 34) {
+    setLinks();
+  }
+});

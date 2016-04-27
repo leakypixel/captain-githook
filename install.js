@@ -8,8 +8,9 @@ var gitHooksDir = path.join(appRoot, ".git", "hooks");
 var gitHooksTempDir = path.join(appRoot, ".git", "local");
 var localHooksDir = path.join(gitHooksDir, "local");
 var projectHooksDir = path.join(appRoot, ".githooks");
+var hooks = ["applypatch-msg", "commit-msg", "post-commit", "post-receive", "post-update", "pre-applypatch", "pre-commit", "prepare-commit-msg", "pre-rebase", "update"];
 
-function setLinks() {
+function cleanInstall() {
   fs.mkdirp(projectHooksDir, function(err) {
     fs.move(gitHooksDir, gitHooksTempDir, function(err) {
       fs.mkdirSync(gitHooksDir);
@@ -20,8 +21,16 @@ function setLinks() {
     });
   });
 }
+
+function rebuildHookLinks() {
+  hooks.forEach(function(hook) {
+    var hookPath = path.join(gitHooksDir, hook);
+    fs.unlinkSync(hookPath);
+  });
+  linkHooks();
+}
+
 function linkHooks() {
-  var hooks = ["applypatch-msg", "commit-msg", "post-commit", "post-receive", "post-update", "pre-applypatch", "pre-commit", "prepare-commit-msg", "pre-rebase", "update"];
   var hookSplitter = path.join(moduleDir, "split-hook.js");
   // Make the hooksplitter executable. I'd prefer this to be a "+x", but this
   // implementation doesn't seem to support it. I could be wrong.
@@ -37,6 +46,8 @@ function linkHooks() {
 fs.stat(localHooksDir, function(err, stats) {
   // Check if folder exists - if not, assume we're safe and run the install.
   if (err && err.code === 'ENOENT') {
-    setLinks();
+    cleanInstall();
+  } else {
+    rebuildHookLinks();
   }
 });

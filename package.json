@@ -1,6 +1,6 @@
 {
   "name": "captain-githook",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "An NPM module to allow managing git hooks with source control.",
   "main": "install.js",
   "scripts": {

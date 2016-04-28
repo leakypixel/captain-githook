@@ -15,6 +15,9 @@ function cleanInstall() {
     fs.move(gitHooksDir, gitHooksTempDir, function(err) {
       fs.mkdirSync(gitHooksDir);
       fs.move(gitHooksTempDir, localHooksDir, function(err) {
+        if (err && err.code === 'ENOENT') {
+          fs.mkdirSync(localHooksDir);
+        }
         fs.symlinkSync(projectHooksDir, path.join(gitHooksDir, "shared"));
         linkHooks();
       });

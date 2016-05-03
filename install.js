@@ -18,7 +18,7 @@ function cleanInstall() {
         if (err && err.code === 'ENOENT') {
           fs.mkdirSync(localHooksDir);
         }
-        fs.symlinkSync(projectHooksDir, path.join(gitHooksDir, "shared"));
+        fs.symlinkSync(projectHooksDir, path.join(gitHooksDir, "shared"), 'junction');
         linkHooks();
       });
     });

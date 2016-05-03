@@ -14,7 +14,7 @@ function exit(code) {
 }
 
 function exec(hook) {
-  var process = spawn('sh', ['-c', hook], {
+  var process = spawn('sh', [hook], {
     stdio: 'inherit'
   });
   // If one of our hooks exits with a code other than zero, we want to pipe that

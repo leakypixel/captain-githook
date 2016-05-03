@@ -9,6 +9,10 @@ var spawn = require('child_process').spawn;
 var callingFile = path.basename(__filename);
 var hooksDir = path.dirname(__filename);
 
+function exit(code) {
+  process.exit(code);
+}
+
 function exec(hook) {
   var process = spawn('sh', ['-c', hook], {
     stdio: 'inherit'
@@ -17,7 +21,7 @@ function exec(hook) {
   // through to our calling shell.
   process.on('close', function(code) {
     if (code !== 0) {
-      process.exit(code);
+      return exit(code);
     }
   });
 }

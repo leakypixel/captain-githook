@@ -1,6 +1,6 @@
 {
   "name": "captain-githook",
-  "version": "0.0.14",
+  "version": "1.0.0",
   "description": "An NPM module to allow managing git hooks with source control.",
   "main": "install.js",
   "scripts": {
@@ -15,10 +15,11 @@
   "keywords": [
     "git",
     "hooks",
-    "git-hooks"
+    "git-hooks",
+    "linting"
   ],
   "author": "Craig Fletcher (hi@leakypixel.net)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/leakypixel/captain-githook/issues"
   },

@@ -1,5 +1,4 @@
 # captain-githook
-An NPM module to allow both repository (central) and local (personal) git hooks.
 
 Stop spending time in code reviews picking up formatting and code style errors,
 and let the machines do it before it gets there.

@@ -24,7 +24,7 @@
     "url": "https://github.com/leakypixel/captain-githook/issues"
   },
   "dependencies": {
-    "app-root-path": "^1.0.0",
+    "app-root-path": "^1.2.0",
     "fs-extra": "^0.28.0"
   }
 }

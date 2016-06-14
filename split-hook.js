@@ -1,4 +1,8 @@
-#!/usr/bin/env node
+#!/bin/bash
+':' //;export PATH="/usr/local/bin:$PATH";
+':' //;exec "$(command -v nodejs || command -v node)" "$0" "$@"
+// Above set to ensure compatibility with Mac OSX GUI tools
+
 var fs = require("fs");
 var path = require("path");
 var spawn = require('child_process').spawn;

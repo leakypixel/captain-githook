@@ -44,10 +44,20 @@ function cleanInstall() {
   });
 }
 
+function removeIfExists(path) {
+  try {
+    fs.accessSync(path, fs.F_OK);
+    fs.unlinkSync(path);
+  } catch (e) {
+    // File doesn't exist, no need to remove.
+  }
+}
+
+
 function rebuildHookLinks() {
   hooks.forEach(function(hook) {
     var hookPath = path.join(gitHooksDir, hook);
-    fs.unlinkSync(hookPath);
+    removeIfExists(hookPath);
   });
   linkHooks();
 }

@@ -8,7 +8,26 @@ var gitHooksDir = path.join(appRoot, ".git", "hooks");
 var gitHooksTempDir = path.join(appRoot, ".git", "local");
 var localHooksDir = path.join(gitHooksDir, "local");
 var projectHooksDir = path.join(appRoot, ".githooks");
-var hooks = ["applypatch-msg", "commit-msg", "post-commit", "post-receive", "post-update", "pre-applypatch", "pre-commit", "prepare-commit-msg", "pre-rebase", "update"];
+var hooks = [
+  "applypatch-msg",
+  "commit-msg",
+  "post-applypatch",
+  "post-checkout",
+  "post-commit",
+  "post-merge",
+  "post-receive",
+  "post-rewrite",
+  "post-update",
+  "pre-applypatch",
+  "pre-auto-gc",
+  "pre-commit",
+  "prepare-commit-msg",
+  "pre-push",
+  "pre-rebase",
+  "pre-receive",
+  "push-to-checkout",
+  "update"
+];
 
 function cleanInstall() {
   fs.mkdirp(projectHooksDir, function(err) {

@@ -26,25 +26,31 @@ const hooks = [
   "pre-rebase",
   "pre-receive",
   "push-to-checkout",
-  "update"
+  "update",
 ];
 
 function cleanInstall() {
-  fs.mkdirp(projectHooksDir, function() {
-    fs.move(gitHooksDir, gitHooksTempDir, function() {
-      fs.mkdirSync(gitHooksDir);
-      fs.move(gitHooksTempDir, localHooksDir, function(err) {
-        if (err && err.code === "ENOENT") {
-          fs.mkdirSync(localHooksDir);
-        }
-        fs.symlinkSync(
-          projectHooksDir,
-          path.join(gitHooksDir, "shared"),
-          "junction"
-        );
-        linkHooks();
+  fs.pathExists(gitHooksDir, (err, exists) => {
+    if (exists) {
+      fs.mkdirp(projectHooksDir, function() {
+        fs.move(gitHooksDir, gitHooksTempDir, function() {
+          fs.mkdirSync(gitHooksDir);
+          fs.move(gitHooksTempDir, localHooksDir, function(err) {
+            if (err && err.code === "ENOENT") {
+              fs.mkdirSync(localHooksDir);
+            }
+            fs.symlinkSync(
+              projectHooksDir,
+              path.join(gitHooksDir, "shared"),
+              "junction"
+            );
+            linkHooks();
+          });
+        });
       });
-    });
+    } else {
+      console.log("Git directory not found, not installing.");
+    }
   });
 }
 

@@ -1,15 +1,15 @@
 # captain-githook
 
-Stop spending time in code reviews picking up formatting and code style errors,
-and let the machines do it before it gets there.
-
+## Install
+`npm install --save-dev captain-githook`
 
 ## Usage
 Install this module to your repository, and put any repository-wide hooks in
 `./.githooks`. You'll now be able to commit and share these hooks. Each of the
 hooks in `./.githooks` must be executable and may only be a file with no
 extension, named after the hook it should run on. These can be used to run
-multiple other scripts or not, the choice is yours.
+multiple other scripts or not, the choice is yours. There are some example hooks
+in the `example-hooks` directory of this repository.
 
 ## How?
 Upon install, this module will run a postinstall hook. This moves any existing
